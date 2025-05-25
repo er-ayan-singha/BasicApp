@@ -1,134 +1,62 @@
 [app]
-# (str) Title of your application
-title = My Application
 
-# (str) Package name (use lowercase, no spaces or special characters)
-package.name = myapp
-
-# (str) Package domain (reverse domain name style)
-package.domain = org.example
-
-# (str) Source code directory (default is '.')
+# Application details
+title = Calculator
+package.name = calculator
+package.domain = org.kivy
 source.dir = .
+source.include_exts = py,kv,png,jpg,kv
+version = 1.0
+requirements = kivy
 
-# (list) List of inclusions by extension
-source.include_exts = py,png,jpg,kv,atlas,ttf,otf,wav,mp3,ini,txt,json,pdf
-
-# (str) Application versioning
-version = 1.0.0
-
-# (str) Automatically extract version from main.py
-version.regex = __version__ = ['"](.*)['"]
-version.filename = %(source.dir)s/main.py
-
-# (str) Application entry point
-entrypoint = main.py
-
-# (list) Supported orientation (portrait, landscape, sensor, all)
+# Orientation and features
 orientation = portrait
-
-# (bool) Fullscreen mode (1 = Yes, 0 = No)
 fullscreen = 0
 
-# (list) Application icon(s)
+# Presplash and icon (optional)
 icon.filename = %(source.dir)s/icon.png
-
-# (list) Presplash image
 presplash.filename = %(source.dir)s/presplash.png
 
-# (str) Supported languages
-osx.kivy_language = en
+# Supported screens
+android.archs = armeabi-v7a, arm64-v8a
 
-# (list) Requirements: comma-separated Python modules
-requirements = python3, kivy, pillow, reportlab
-
-# (str) Custom source folders to include (separate by comma)
-#source.include_patterns = assets/*,images/*
-
-# (list) Permissions for Android app
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
-
-# (int) Android API level (you must have it installed)
-android.api = 31
-
-# (int) Minimum supported Android API
-android.minapi = 21
-
-# (int) Targeted Android API (set same as android.api for best results)
-android.target = 31
-
-# (str) NDK version to use
+# NDK, API, and build tools
 android.ndk = 23b
+android.api = 33
+android.build_tools = 33.0.2
 
-# (int) Android NDK API level
-android.ndk_api = 21
+# Entry point
+entrypoint = main.py
 
-# (bool) Enable Android X support
-android.enable_androidx = True
-
-# (list) Add any Java .jar files to include
-#android.add_jars = path/to/yourlib.jar
-
-# (list) Android AAR libraries
-#android.add_aars = path/to/yourlib.aar
-
-# (bool) Hide status bar
-android.hide_statusbar = False
-
-# (list) Screens to support
-android.supported_screens = small,normal,large,xlarge
-
-# (str) Entry point for service (optional)
-#android.service = myservice.py
-
-# (bool) Launch app with service (e.g., background task)
-#android.start_service = False
-
-# (bool) Package as android App Bundle (Google Play Store format)
-android.build_type = release
-
-# (bool) Auto accept SDK licenses
-android.accept_sdk_license = True
-
-# (str) Architecture (armeabi-v7a, arm64-v8a, x86, x86_64)
-android.arch = armeabi-v7a
-
-# (bool) Enable logcat on device when launching
+# Logging and packaging
 log_level = 2
+android.logcat_filters = *:S python:D
 
-# (str) Path to keystore for signing release APK
-#android.keystore = mykeystore.keystore
-#android.keyalias = mykey
-#android.keyalias_password = password
-#android.keystore_password = password
+# Permissions (add if needed)
+# android.permissions = INTERNET
 
-# (str) iOS deployment target version (iOS only)
-ios.min_version = 12.0
+# Include .kv files
+include_exts = py, kv
 
-# (str) iOS archs (iOS only)
-ios.archs = arm64
+# Other options
+copy_libs = 1
 
-# (list) iOS frameworks to include (iOS only)
-#ios.frameworks = Metal, UIKit
+# Don't include unnecessary files
+exclude_dirs = tests, bin, venv
 
-# (bool) Code obfuscation (Python files only)
-#android.obfuscate = True
+# Keep original .py files in APK
+android.keep_build_dir = 0
 
-# (bool) Include *.pyo files (Python optimized bytecode)
-#android.include_pyo = False
+# Avoid stripping binaries (optional for debugging)
+# android.strip = false
 
-# (bool) Compress app (speeds up installation)
-#android.compress = True
+# Don't use AndroidX unless needed
+# android.enable_androidx = 0
 
-# (str) Custom build directory
-#build_dir = ./build
+# Optional: specify custom Java version
+# android.accept_sdk_license = True
 
 [buildozer]
-# (str) Log level (0 = error, 1 = warning, 2 = info, 3 = debug, 4 = trace)
+
 log_level = 2
-
-# (bool) Whether to warn about running as root
 warn_on_root = 1
-
-# (str) Buildozer global cache directory
-#build_cache_dir = ~/.buildozer_cache

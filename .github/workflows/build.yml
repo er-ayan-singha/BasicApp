@@ -35,6 +35,7 @@ jobs:
         with:
           command: buildozer android debug
           buildozer_version: stable
+          image: kivy/buildozer:0.41  # Avoid broken :latest image
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

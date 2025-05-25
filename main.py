@@ -1,24 +1,107 @@
-from kivy.config import Config
-# Set screen size for desktop testing (simulating a phone)
-Config.set('graphics', 'width', '360')
-Config.set('graphics', 'height', '640')
-
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 
-# Load the KV file
-Builder.load_file("calculator.kv")
+KV = '''
+<CalculatorLayout>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    TextInput:
+        id: result
+        font_size: 32
+        size_hint_y: 0.2
+        multiline: False
+        halign: "right"
+        readonly: True
+        background_color: (1, 1, 1, 1)
+        foreground_color: (0, 0, 0, 1)
+
+    GridLayout:
+        cols: 4
+        spacing: 5
+        size_hint_y: 0.8
+
+        Button:
+            text: "7"
+            font_size: 24
+            on_press: result.text += "7"
+        Button:
+            text: "8"
+            font_size: 24
+            on_press: result.text += "8"
+        Button:
+            text: "9"
+            font_size: 24
+            on_press: result.text += "9"
+        Button:
+            text: "/"
+            font_size: 24
+            on_press: result.text += "/"
+
+        Button:
+            text: "4"
+            font_size: 24
+            on_press: result.text += "4"
+        Button:
+            text: "5"
+            font_size: 24
+            on_press: result.text += "5"
+        Button:
+            text: "6"
+            font_size: 24
+            on_press: result.text += "6"
+        Button:
+            text: "*"
+            font_size: 24
+            on_press: result.text += "*"
+
+        Button:
+            text: "1"
+            font_size: 24
+            on_press: result.text += "1"
+        Button:
+            text: "2"
+            font_size: 24
+            on_press: result.text += "2"
+        Button:
+            text: "3"
+            font_size: 24
+            on_press: result.text += "3"
+        Button:
+            text: "-"
+            font_size: 24
+            on_press: result.text += "-"
+
+        Button:
+            text: "C"
+            font_size: 24
+            on_press: result.text = ""
+        Button:
+            text: "0"
+            font_size: 24
+            on_press: result.text += "0"
+        Button:
+            text: "="
+            font_size: 24
+            on_press: root.calculate(result.text)
+        Button:
+            text: "+"
+            font_size: 24
+            on_press: result.text += "+"
+'''
 
 class CalculatorLayout(BoxLayout):
     def calculate(self, expression):
         try:
             self.ids.result.text = str(eval(expression))
-        except:
+        except Exception:
             self.ids.result.text = "Error"
 
 class CalculatorApp(App):
     def build(self):
+        Builder.load_string(KV)
         return CalculatorLayout()
 
 if __name__ == "__main__":

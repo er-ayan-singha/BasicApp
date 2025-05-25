@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Updated to avoid retirement of ubuntu-20.04
+    runs-on: ubuntu-22.04  # Use supported runner
 
     steps:
       - name: Checkout repository
@@ -18,13 +18,13 @@ jobs:
         shell: bash
 
       - name: Cache Buildozer global directory
-        uses: actions/cache@v2
+        uses: actions/cache@v3  # Updated to v3
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
       - name: Cache .buildozer directory
-        uses: actions/cache@v2
+        uses: actions/cache@v3  # Updated to v3
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
